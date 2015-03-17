@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+<div class="container">
+    <ul>
+        <div class="row">
+            {% for post in paginator.posts %}
+            <div class="col s12 m6 l6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="/img/{{ post.img }}" height="200px">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title activator grey-text text-darken-4 center-align">{{ post.title }} <i
+                                class="mdi-navigation-more-vert right"></i></div>
+                        <div class="left-align">
+                            <a href="{{ post.url | prepend: site.baseurl }}">Read On</a>
+                        </div>
+                    </div>
+                    <div class="card-reveal">
+                        <div class="card-title grey-text text-darken-4 center-align">{{ post.title }}
+                            <i class="mdi-navigation-close right"></i>
+                        </div>
+                        <div>
+                            <p>{{ post.excerpt }}</p>
+                        </div>
+                        <div class="left-align">
+                            <a class="right-align" href="{{ post.url | prepend: site.baseurl }}">Read On</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </ul>
+
+    <div class="pagination-container">
+        {% include pagination.html %}
+    </div>
+</div>

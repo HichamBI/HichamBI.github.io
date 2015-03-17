@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.pagination-container {
+    text-align: center;
+}
+
+.pagination {
+    margin: 0 auto;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.post-title {
+    text-align: center;
+}

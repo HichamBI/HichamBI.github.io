@@ -1,0 +1,26 @@
+<ul class="pagination">
+    <li class="{% if paginator.page == 1 %} disabled {% endif %} waves-effect">
+        <a href="{{ paginator.previous_page_path }}">
+            <i class="mdi-navigation-chevron-left"></i>
+        </a>
+    </li>
+
+    {% for pageNum in (1..paginator.total_pages) %}
+    <li class="{% if paginator.page == pageNum %} orange accent-4 active {% endif %} waves-effect">
+        {% if pageNum == 1 %}
+        <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' | replace: ':num', pageNum }}">
+            {{ pageNum }}
+        </a>
+        {% else %}
+        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', pageNum }}">
+            {{ pageNum }}
+        </a>
+        {% endif %}
+    </li>
+    {% endfor %}
+    <li class="{% if paginator.page == paginator.total_pages %} disabled {% endif %} waves-effect">
+        <a href="{{ paginator.next_page_path }}">
+            <i class="mdi-navigation-chevron-right"></i>
+        </a>
+    </li>
+</ul>
