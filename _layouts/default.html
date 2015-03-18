@@ -13,13 +13,15 @@
   <body>
     {% include header.html %}
 
+    <main>
         {{ content }}
-
+    </main>
+    
     {% include footer.html %}
 
-    {% include commentsCount.html %}
+    {% include comments-count.html %}
 
-    {% include googleAnalytics.html %}
+    {% include google-analytics.html %}
   </body>
 
 </html>
