@@ -23,6 +23,8 @@ Note that all these libraries use Batik to manipulate SVG files.
  
 #### How ?
 
+THe main idea is to use Batik tools to create a main SVG stream that contains all our text, images ... and trancode it and generate a PDF file.
+
 #####- Dependencies :
 
 We need to import this dependencies to our project : 
@@ -63,10 +65,10 @@ We need to import this dependencies to our project :
 
 ##### Creating the main class :
 
-We are going to create a class that contains all methods we need :
+We are going to create a class that contains all methods we need to create our report:
 
 #####- Class initialization
-Create our SVGGraphics2D that will allow us to generate the main SVG stream that contains all our graphics.
+Create SVGGraphics2D instance that will allow us to generate the main SVG stream.
 
 1.  Get a DOMImplementation and create an instance of org.w3c.dom.Document.
 2.  Get a SVGGeneratorContext from Document instance and create an instance of SVGGraphics2D.
@@ -155,7 +157,7 @@ Generate the main SVG stream and transcode it to an PDF stream.
 }
 {% endhighlight %}
 
-#####- Results :
+#####- Testing :
 {% highlight ruby %}  
   public static void main(String... arg) {
    PDFDoc pdfDoc = new PDFDoc(600f, 588f);
@@ -183,7 +185,7 @@ Generate the main SVG stream and transcode it to an PDF stream.
 {% endhighlight %} 
 
 ##### What about SVG images with gradient paint ?
-If we try tu use this code with SVG with gradient pain, all gradients will be turned to black color.
+If you try tu use this code with SVG that include gradient pain, all gradients will be turned to black color.
 To fix this, we must define an ExtensionHandler and add it to our SVGGeneratorContext.
 
 #####-   The GradientExtensionHandler class
@@ -205,82 +207,7 @@ We are going to extend the DefaultExtensionHandler and override the handlePaint 
       return super.handlePaint(paint, generatorCtx);
     }
     
-    private SVGPaintDescriptor getRadialGradientPaintDescriptor
-                            (RadialGradientPaint paint, SVGGeneratorContext generatorCtx) {
-     RadialGradientPaint gradient = paint;
-     Element grad = generatorCtx.getDOMFactory().createElementNS(SVG_NAMESPACE_URI, SVG_RADIAL_GRADIENT_TAG);
-     
-     String id = generatorCtx.getIDGenerator().generateID("gradient");
-     
-     grad.setAttributeNS(null, SVGSyntax.SVG_ID_ATTRIBUTE, id);
-     
-     Point2D centerPt = gradient.getCenterPoint();
-     grad.setAttributeNS(null, SVGSyntax.SVG_CX_ATTRIBUTE, String.valueOf(centerPt.getX()));
-     grad.setAttributeNS(null, SVGSyntax.SVG_CY_ATTRIBUTE, String.valueOf(centerPt.getY()));
-     
-     Point2D focusPt = gradient.getFocusPoint();
-     grad.setAttributeNS(null, SVGSyntax.SVG_FX_ATTRIBUTE, String.valueOf(focusPt.getX()));
-     grad.setAttributeNS(null, SVGSyntax.SVG_FY_ATTRIBUTE, String.valueOf(focusPt.getY()));
-     
-     grad.setAttributeNS(null, SVGSyntax.SVG_R_ATTRIBUTE, String.valueOf(gradient.getRadius()));
-     
-     setMultipleGradientPaintAttributes(generatorCtx, gradient, grad);
-     
-     return new SVGPaintDescriptor("url(#" + id + ")", SVG_OPAQUE_VALUE, grad);
-    }
-    
-    private SVGPaintDescriptor getLinearGradientPaintDescriptor
-                            (LinearGradientPaint paint, SVGGeneratorContext generatorCtx) {
-     LinearGradientPaint gradient = paint;
-     String id = generatorCtx.getIDGenerator().generateID("gradient");
-     Document doc = generatorCtx.getDOMFactory();
-     Element grad = doc.createElementNS(SVG_NAMESPACE_URI, SVG_LINEAR_GRADIENT_TAG);
-     
-     grad.setAttributeNS(null, SVG_ID_ATTRIBUTE, id);
-     
-     Point2D pt = gradient.getStartPoint();
-     grad.setAttributeNS(null, "x1", String.valueOf(pt.getX()));
-     grad.setAttributeNS(null, "y1", String.valueOf(pt.getY()));
-     
-     pt = gradient.getEndPoint();
-     grad.setAttributeNS(null, "x2", String.valueOf(pt.getX()));
-     grad.setAttributeNS(null, "y2", String.valueOf(pt.getY()));
-     
-     setMultipleGradientPaintAttributes(generatorCtx, gradient, grad);
-     
-     return new SVGPaintDescriptor("url(#" + id + ")", SVG_OPAQUE_VALUE, grad);
-    }
-    
-    private void setMultipleGradientPaintAttributes
-                            (SVGGeneratorContext generatorCtx, MultipleGradientPaint gradient, Element grad) {
-     if (gradient.getCycleMethod().equals(MultipleGradientPaint.REFLECT)) {
-      grad.setAttributeNS(null, SVG_SPREAD_METHOD_ATTRIBUTE, SVG_REFLECT_VALUE);
-     } else if (gradient.getCycleMethod().equals(MultipleGradientPaint.REPEAT)) {
-      grad.setAttributeNS(null, SVG_SPREAD_METHOD_ATTRIBUTE, SVG_REPEAT_VALUE);
-     }
- 
-     if (gradient.getColorSpace().equals(MultipleGradientPaint.LINEAR_RGB)) {
-      grad.setAttributeNS(null, SVG_COLOR_INTERPOLATION_ATTRIBUTE, SVG_LINEAR_RGB_VALUE);
-     } else if (gradient.getColorSpace().equals(MultipleGradientPaint.SRGB)) {
-      grad.setAttributeNS(null, SVG_COLOR_INTERPOLATION_ATTRIBUTE, SVG_SRGB_VALUE);
-     }
- 
-     Color[] colors = gradient.getColors();
-     float[] fracs = gradient.getFractions();
-     
-      for (int i = 0; i < colors.length; i++) {
-      Element stop = generatorCtx.getDOMFactory().createElementNS(SVG_NAMESPACE_URI, SVG_STOP_TAG);
-      SVGPaintDescriptor pd = SVGColor.toSVG(colors[i], generatorCtx);
-      stop.setAttribute(SVG_OFFSET_ATTRIBUTE, (int) (fracs[i] * 100.0f) + "%");
-      stop.setAttribute(SVG_STOP_COLOR_ATTRIBUTE, pd.getPaintValue());
-      
-      if (colors[i].getAlpha() != 255) {
-       stop.setAttribute(SVG_STOP_OPACITY_ATTRIBUTE, pd.getOpacityValue());
-      }
-      
-      grad.appendChild(stop);
-     }
-    }
+    // You find the complete class implementation in my github repository. 
    }
 {% endhighlight %} 
 
