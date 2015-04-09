@@ -13,7 +13,7 @@ comments: true
           </div>
           <div class="col s6 right-align ">
                   <i class="mdi-editor-mode-comment"></i> &nbsp;
-                  <a href="{{site.url}}{{page.url}}#disqus_thread"></a>
+                  <a href="{{page.url}}#disqus_thread"></a>
           </div>
       </div>
   </header>
@@ -21,6 +21,5 @@ comments: true
   <article class="post-content">
     {{ content }}
   </article>
-
     {% include comments.html %}
 </div>
