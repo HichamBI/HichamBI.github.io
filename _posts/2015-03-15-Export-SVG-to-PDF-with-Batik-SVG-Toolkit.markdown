@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Export SVG to PDF with Batik SVG Toolkit"
+title:  "SVG to PDF with Batik SVG Toolkit"
 date:   2015-03-15 16:09:00
 img: "posts/svg-to-pdf-export.svg"
 ---
