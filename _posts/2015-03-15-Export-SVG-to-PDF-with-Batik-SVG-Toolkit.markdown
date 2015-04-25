@@ -23,7 +23,7 @@ Note that all these libraries use Batik to manipulate SVG files.
  
 #### How ?
 
-THe main idea is to use Batik tools to create a main SVG stream that contains all our text, images ... and trancode it and generate a PDF file.
+The main idea is to use Batik tools to create a main SVG stream that contains all our text, images ... and trancode it and generate a PDF file.
 
 #####- Dependencies :
 
@@ -76,7 +76,7 @@ Create SVGGraphics2D instance that will allow us to generate the main SVG stream
 4.  Create a BridgeContext.
 5.  Create a GVTBuilder.
 
-{% highlight ruby %}
+{% highlight java %}
 
 private void initialize() {
     DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
@@ -104,7 +104,7 @@ Create GraphicsNode from svgFile and put it in our SVGGraphics2D instance.
 
 1. Get an SVGDocument from svgFile and create a GraphicsNode using BridgeContext and GVTBuilder.
 2. Use AffineTransform to put the svgFile to the good position and paint the GraphicsNode.
-{% highlight ruby %}  
+{% highlight java %}  
     public void addSvgImage(File svgFile, float xPosition, float yPosition) {
     SVGDocument svgDocument = factory.createSVGDocument(svgFile.toURL().toString());
     GraphicsNode mapGraphics = builder.build(ctx, svgDocument);
@@ -120,7 +120,7 @@ Create GraphicsNode from svgFile and put it in our SVGGraphics2D instance.
 #####- addTextLine(String text, Font font, float xPosition, float yPosition)
 We are going to put our text in the SVGGraphics2D
 
-{% highlight ruby %}  
+{% highlight java %}  
   public void addTextLine(String text, Font font, float xPosition, float yPosition) {
    svgGraphics2D.setFont(font);
    svgGraphics2D.drawString(text, xPosition, yPosition);
@@ -133,7 +133,7 @@ Generate the main SVG stream and transcode it to an PDF stream.
 1. Get svgGraphics2D stream.
 2. Generate a PDF stream using PDFTranscoder.
 
-{% highlight ruby %}  
+{% highlight java %}  
   public ByteArrayOutputStream getPDFStream() throws IOException, TranscoderException {
    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
    Writer out = new OutputStreamWriter(outputStream, "UTF-8");
@@ -158,7 +158,7 @@ Generate the main SVG stream and transcode it to an PDF stream.
 {% endhighlight %}
 
 #####- Testing :
-{% highlight ruby %}  
+{% highlight java %}  
   public static void main(String... arg) {
    PDFDoc pdfDoc = new PDFDoc(600f, 588f);
    
@@ -195,7 +195,7 @@ We are going to extend the DefaultExtensionHandler and override the handlePaint 
 2. For each SVGPaintDescriptor, we are going to define a gradient node element and set several attributes like color starts and stops, FX, FY etc.
 3. Add GradientExtensionHandler to our SVGGeneratorContext.
 
-{% highlight ruby %} 
+{% highlight java %} 
    class GradientExtensionHandler extends DefaultExtensionHandler {
     @Override
     public SVGPaintDescriptor handlePaint(Paint paint, SVGGeneratorContext generatorCtx) {
@@ -213,7 +213,7 @@ We are going to extend the DefaultExtensionHandler and override the handlePaint 
 
 Finally, set GradientExtensionHandler to SVGGeneratorContext :  
 
-{% highlight ruby %} 
+{% highlight java %} 
     sVGGeneratorContext.setExtensionHandler(new GradientExtensionHandler());
 {% endhighlight %}
 
