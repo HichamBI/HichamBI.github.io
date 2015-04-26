@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  "Extending Highcharts : Adding Color Axis to some charts that not support it"
+title:  "Highcharts.js : Adding Color Axis to charts that not support it"
 date:   2015-04-25 21:4:00
 img: "posts/pie-chart.svg"
 ---
 
-Highcharts JS is a JavaScript charting library based on SVG and VML rendering. Official website : [www.highcharts.com](www.highcharts.com).
+Highcharts JS is a JavaScript charting library based on SVG and VML rendering. Official website : [www.highcharts.com](www.highcharts.com)
 
 In this post, we will extend this library to add a Color Axis to charts that not support it.
 
-What is Color Axis :
+#####- What is Color Axis :
 
 A Color Axis is represented by a gradient inside the legend on the chart and indicate colored values on the chart.
 You can find a demonstration here : http://www.highcharts.com/demo/treemap-coloraxis 
@@ -18,19 +18,19 @@ Color Axis is supported by heat map chart, and we will use heat map properties t
 
 #####- Dependencies :
 
--- highcharts.js
++ highcharts.js
 
--- heatmap.js
++ heatmap.js
 
--- jquery
++ jquery
 
 #####- Extending Pie chart :
 
 To add a Color Axis to a Pie chart we will :
 
-- Extend Pie series Types and define those properties : optionalAxis, colorKey, translateColors, type, axisTypes.
-- Wrap the axis prototype render function to not render axis on Pie char.
-- Wrap the pie series translate function to call heat map translateColor function.
+1. Extend Pie Series and override these properties : optionalAxis, colorKey, translateColors, type, axisTypes.
+2. Wrap the axis prototype render function to not render axis on Pie char.
+3. Wrap the Pie Series translate function to call heat map translateColor function.
 
 {% highlight javascript %}
     (function (H) {
@@ -66,7 +66,7 @@ To add a Color Axis to a Pie chart we will :
 
 #####- Extending Column chart :
 
-- In the same way as Pie chart : 
+In the same way as Pie chart : 
 
 {% highlight javascript %}
     (function (H) {
@@ -98,4 +98,4 @@ To add a Color Axis to a Pie chart we will :
 
 You can find an example [here](http://embed.plnkr.co/XWdQNB/preview).
 
-And source code [here](https://github.com/HichamBI/Extending-Highcharts).
+And sources [here](https://github.com/HichamBI/Extending-Highcharts).
