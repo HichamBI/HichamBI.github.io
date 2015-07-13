@@ -253,55 +253,8 @@ http://tntfrforfree.1s.fr/24/play.m3u8
 
 ##############################################################
 #EXTINF:-1,[COLOR yellow]--- SPORTS ---[/COLOR]
+http://0.0.0.0:1234
 ##############################################################
-
-#EXTINF:-1,bein_sport_1_fr 
-http://ift.tt/1HmoDMM
-#EXTINF:-1,bein_sport_2_fr 
-http://37.59.51.173:8085/Bien_Sport_2_fr/index.m3u8?token=sib5581bd5c90d04
-
-#EXTINF:-1,bein sport 1 SD 
-http://188.93.234.112:8082/TV4001 
-#EXTINF:-1,bein sport 2 SD 
-http://188.93.234.112:8082/TV4002 
-#EXTINF:-1,bein sport 3 SD 
-http://188.93.234.112:8082/TV4003 
-#EXTINF:-1,bein sport 4 SD 
-http://188.93.234.112:8082/TV4004 
-#EXTINF:-1,bein sport 5 SD 
-http://188.93.234.112:8082/TV4005 
-#EXTINF:-1,bein sport 6 SD 
-http://188.93.234.112:8082/TV4006 
-#EXTINF:-1,bein sport 7 SD 
-http://188.93.234.112:8082/TV4007 
-#EXTINF:-1,bein sport 8 SD 
-http://188.93.234.112:8082/TV4008 
-#EXTINF:-1,bein sport 9 SD 
-http://188.93.234.112:8082/TV4009 
-#EXTINF:-1,bein sport 10 SD 
-http://188.93.234.112:8082/TV4010 
-#EXTINF:-1,bein sport 11 SD 
-http://188.93.234.112:8082/TV4011 
-#EXTINF:-1,bein sport 12 SD 
-http://188.93.234.112:8082/TV4012 
-#EXTINF:-1,bein sport 13 SD 
-http://188.93.234.112:8082/TV4013 
-#EXTINF:-1,bein sport 14 SD 
-http://188.93.234.112:8082/TV4014 
-#EXTINF:-1,bein sport 15 SD 
-http://188.93.234.112:8082/TV4015
-
-#EXTINF:-1,ARENA Sport 1
-http://balkanstream.com/stream/arenasport1sr/putidoma22/udhfbu
-#EXTINF:-1,ARENA Sport 2
-http://balkanstream.com/stream/arenasport2sr/putidoma22/udhfbu
-#EXTINF:-1,ARENA Sport 3
-http://balkanstream.com/stream/arenasport3sr/putidoma22/udhfbu
-#EXTINF:-1,ARENA Sport 4
-http://balkanstream.com/stream/arenasport4sr/putidoma22/udhfbu
-#EXTINF:-1,ARENA Sport 5
-http://balkanstream.com/stream/arenasport5sr/putidoma22/udhfbu
-
 #EXTINF:0,EuroSport HD
 http://hlsstr04.svc.iptv.rt.ru/hls/CH_C02_EUROSPORTHD/variant.m3u8?version=2
 #EXTINF:0, EuroSport News
@@ -433,7 +386,8 @@ http://tv.ut.cx/cinqplus.mp4
 http://teleclub.fr/cinqplus.mp4
 
 ############################################################
-#EXTINF:-1,[COLOR red]--- Nile Sat ---[/COLOR] 
+#EXTINF:-1,[COLOR red]--- Nile Sat ---[/COLOR]
+http://0.0.0.0:1234
 ############################################################
 
 #EXTINF:0,Mekke
@@ -498,6 +452,7 @@ http://bab-live.hls.adaptive.level3.net/hls-live/bab-channel05/_definst_/live/st
 
 ############################################################
 #EXTINF:-1,[COLOR red] Switzerland TV [/COLOR]
+http://0.0.0.0:1234
 ############################################################
 
 #EXTINF:-1 ,RTS un
@@ -508,6 +463,7 @@ http://streaming-hub.com/tv/i/rts2_1@97470/index_1300_av-b.m3u8?sd=10&rebase=on
 
 ############################################################ 
 #EXTINF:-1,[COLOR red]  Belgium  TV [/COLOR]
+http://0.0.0.0:1234
 ############################################################
 
 #EXTINF:-1 ,TÈlÈ MB
@@ -521,6 +477,7 @@ rtmp://wowza.tvlux.imust.org/live/tvlux-live
 
 ############################################################
 #EXTINF:-1,[COLOR red]--- USA TV --- [/COLOR]
+http://0.0.0.0:1234
 ############################################################ 
 
 #EXTINF:0,ABC 22 HD
