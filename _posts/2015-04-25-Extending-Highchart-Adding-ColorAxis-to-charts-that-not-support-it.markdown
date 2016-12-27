@@ -9,14 +9,14 @@ Highcharts JS is a JavaScript charting library based on SVG and VML rendering. O
 
 In this post, we will extend this library to add a Color Axis to charts that not support it.
 
-##### - What is Color Axis :
+###### - What is Color Axis :
 
 A Color Axis is represented by a gradient inside the legend on the chart and indicate colored values on the chart.
 You can find a demonstration here : http://www.highcharts.com/demo/treemap-coloraxis 
 
 Color Axis is supported by heat map chart, and we will use heat map properties to add Color Axis to other charts.
 
-####- Dependencies :
+##### - Dependencies :
 
 + highcharts.js
 
@@ -24,7 +24,7 @@ Color Axis is supported by heat map chart, and we will use heat map properties t
 
 + jquery
 
-####- Extending Pie chart :
+##### - Extending Pie chart :
 
 To add a Color Axis to a Pie chart we will :
 
@@ -64,7 +64,7 @@ To add a Color Axis to a Pie chart we will :
 
 {% endhighlight %}
 
-####- Extending Column chart :
+##### - Extending Column chart :
 
 In the same way as Pie chart : 
 
@@ -94,7 +94,7 @@ In the same way as Pie chart :
     }(Highcharts));
 {% endhighlight %}
 
-####- Examples :
+##### - Examples :
 
 You can find an example [here](http://embed.plnkr.co/XWdQNB/preview).
 
