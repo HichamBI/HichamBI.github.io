@@ -11,7 +11,7 @@ Do you want to unit test an Angular 2 application with Mocha, on both, browser a
 Before I wrote this post, 
 I've googled to find an existing tutorial doing the same thing 
 and I found a post on [Radzen blog](http://www.radzen.com/blog/testing-angular-webpack-mocha/) that launch tests on Node
-and it work fine except when I've tried to test a component with an ** ngFor ** directive, the following error was thrown :
+and it work fine except when I've tried to test a component with an **ngFor** directive, the following error was thrown :
 
 {% highlight javascript %}
 
