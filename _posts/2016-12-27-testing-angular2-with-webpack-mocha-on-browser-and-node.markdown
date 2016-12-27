@@ -397,7 +397,9 @@ Launch tests with :
 
 Tests results on the console :
 
-
+<p align="center">  
+    <img src="/img/node-tests-result.png" alt="Tests results on Node console"/>
+</p>
 
 #### 2. Browser testing
 
@@ -471,6 +473,10 @@ Launch tests with :
 
 Go to [localhost:8888]() to see the results.
 
+
+<p align="center">  
+    <img src="/img/browser-tests-result.png" alt="Tests results on Node console"/>
+</p>
 
 
 You can find code source [here](https://github.com/HichamBI/Angular2-Webpack-Mocha-Chai-Sinon).
