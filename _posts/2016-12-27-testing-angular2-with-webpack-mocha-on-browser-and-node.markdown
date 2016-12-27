@@ -10,7 +10,7 @@ Do you want to unit test an Angular 2 application with Mocha, on both, browser a
 
 Before I wrote this post, 
 I've googled to find an existing tutorial doing the same thing 
-and I found a post on [Radzen blog](http://www.radzen.com/blog/testing-angular-webpack-mocha/) that launch tests on Node
+and I found a post on [Radzen blog](http://www.radzen.com/blog/testing-angular-webpack-mocha/) that explain how to launch tests on Node
 and it work fine except when I've tried to test a component with an **ngFor** directive, the following error was thrown :
 
 
@@ -23,7 +23,7 @@ to launch test in browser with the mocha-loader plugin.
 
 I'll not past all the sources, you can find them [here](https://github.com/HichamBI/Angular2-Webpack-Mocha-Chai-Sinon).
 
-Let start.
+Let's start.
 
  
 #### 0. Settings
@@ -188,7 +188,7 @@ Now we are ready for testing.
 
 In this part, we will see the webpack configuration to launch mocha test in Node environment. 
 
-We use **mocha-webpack** to precompile bundles on server side, but is not enough,
+We use **mocha-webpack** to precompile bundles on server side, but it's not enough,
 Angular 2 (especially **Zone.js**) needs some part of DOM to work, this is why we use **jsdom** library. 
 
  > **webpack.test.common.js :**
@@ -475,6 +475,8 @@ Go to [localhost:8888]() to see the results.
 You can find code source [here](https://github.com/HichamBI/Angular2-Webpack-Mocha-Chai-Sinon).
 
 Don't hesitate to comment if I missed something or you have an issue or better idea.
+
+Hope that can help.
 
 Thanks,
 
