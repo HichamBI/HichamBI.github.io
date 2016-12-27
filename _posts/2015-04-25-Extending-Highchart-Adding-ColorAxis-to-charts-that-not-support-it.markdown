@@ -9,7 +9,7 @@ Highcharts JS is a JavaScript charting library based on SVG and VML rendering. O
 
 In this post, we will extend this library to add a Color Axis to charts that not support it.
 
-####- What is Color Axis :
+##### - What is Color Axis :
 
 A Color Axis is represented by a gradient inside the legend on the chart and indicate colored values on the chart.
 You can find a demonstration here : http://www.highcharts.com/demo/treemap-coloraxis 
