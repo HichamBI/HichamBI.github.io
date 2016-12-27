@@ -13,13 +13,10 @@ I've googled to find an existing tutorial doing the same thing
 and I found a post on [Radzen blog](http://www.radzen.com/blog/testing-angular-webpack-mocha/) that launch tests on Node
 and it work fine except when I've tried to test a component with an **ngFor** directive, the following error was thrown :
 
-{% highlight javascript %}
 
-Error in ./AppComponent class AppComponent - inline template:2:10
+    Error in ./AppComponent class AppComponent - inline template:2:10
+    caused by: Node is not defined
 
-caused by: Node is not defined
-
-{% endhighlight %}
 
 In this post, I want the share with you my solution to this issue and also the Webpack configuration
 to launch test in browser with the mocha-loader plugin. 
