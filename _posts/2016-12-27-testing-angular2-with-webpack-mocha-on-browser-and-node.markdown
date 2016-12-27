@@ -6,9 +6,7 @@ img: "posts/angular2.svg"
 ---
 
 Hey !
-
 Do you want to unit test an Angular 2 application with Mocha, on both, browser and/or Node. (without Karma or PhantomJs) ?
-If not, get out !
 
 Before I wrote this post, 
 I've googled to find an existing post doing the same thing 
