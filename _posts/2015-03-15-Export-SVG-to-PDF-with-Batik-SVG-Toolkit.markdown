@@ -25,7 +25,7 @@ Note that all these libraries use Batik to manipulate SVG files.
 
 The main idea is to use Batik tools to create a main SVG stream that contains all our text, images ... and trancode it and generate a PDF file.
 
-#####- Dependencies :
+##### - Dependencies :
 
 We need to import this dependencies to our project : 
 
@@ -67,7 +67,7 @@ We need to import this dependencies to our project :
 
 We are going to create a class that contains all methods we need to create our report:
 
-#####- Class initialization
+##### - Class initialization
 Create SVGGraphics2D instance that will allow us to generate the main SVG stream.
 
 1.  Get a DOMImplementation and create an instance of org.w3c.dom.Document.
@@ -99,7 +99,7 @@ private void initialize() {
 
 {% endhighlight %}
 
-#####- addSvgImage(File svgFile, float xPosition, float yPosition)
+##### - addSvgImage(File svgFile, float xPosition, float yPosition)
 Create GraphicsNode from svgFile and put it in our SVGGraphics2D instance.
 
 1. Get an SVGDocument from svgFile and create a GraphicsNode using BridgeContext and GVTBuilder.
@@ -117,7 +117,7 @@ Create GraphicsNode from svgFile and put it in our SVGGraphics2D instance.
 }
 {% endhighlight %}
 
-#####- addTextLine(String text, Font font, float xPosition, float yPosition)
+##### - addTextLine(String text, Font font, float xPosition, float yPosition)
 We are going to put our text in the SVGGraphics2D
 
 {% highlight java %}  
@@ -127,7 +127,7 @@ We are going to put our text in the SVGGraphics2D
   }
 {% endhighlight %} 
 
-#####- getPDFStream()
+##### - getPDFStream()
 Generate the main SVG stream and transcode it to an PDF stream.
 
 1. Get svgGraphics2D stream.
@@ -157,7 +157,7 @@ Generate the main SVG stream and transcode it to an PDF stream.
 }
 {% endhighlight %}
 
-#####- Testing :
+##### - Testing :
 {% highlight java %}  
   public static void main(String... arg) {
    PDFDoc pdfDoc = new PDFDoc(600f, 588f);
@@ -188,7 +188,7 @@ Generate the main SVG stream and transcode it to an PDF stream.
 If you try tu use this code with SVG that include gradient pain, all gradients will be turned to black color.
 To fix this, we must define an ExtensionHandler and add it to our SVGGeneratorContext.
 
-#####-   The GradientExtensionHandler class
+##### -   The GradientExtensionHandler class
 We are going to extend the DefaultExtensionHandler and override the handlePaint methode.
 
 1. For each gradient type, we are going to define an SVGPaintDescriptor.
