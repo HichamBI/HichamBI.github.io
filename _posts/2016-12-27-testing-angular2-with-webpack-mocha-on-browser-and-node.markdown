@@ -5,9 +5,15 @@ date:   2016-12-27 19:00:00
 img: "posts/angular2.svg"
 ---
 
-Hey! In this post, we will see how to unit test an Angular 2 application with Mocha, on both, browser and Node. (without Karma or PhantomJs).
+Hey !
 
-Before I write this post, I've googled to find an existing post doing the same thing and I found a post on [Radzen blog](http://www.radzen.com/blog/testing-angular-webpack-mocha/) that work fine except when I tried to test a component with an **ngFor** directive, the following error was thrown :
+Do you want to unit test an Angular 2 application with Mocha, on both, browser and/or Node. (without Karma or PhantomJs) ?
+If not, get out !
+
+Before I wrote this post, 
+I've googled to find an existing post doing the same thing 
+and I found a post on [Radzen blog](http://www.radzen.com/blog/testing-angular-webpack-mocha/) that launch test in Node
+and it work fine except when I tried to test a component with an **ngFor** directive, the following error was thrown :
 
 {% highlight javascript %}
 
@@ -15,11 +21,12 @@ Before I write this post, I've googled to find an existing post doing the same t
 
 {% endhighlight %}
 
-Don't worry, I know how to fix it !!
+In this post, I want the share with you my solution to this issue and also the Webpack configuration
+to launch test in browser with the mocha-loader plugins. 
 
 So, let start.
 
-PS : I'll not past all the source files, you can find them [here](https://github.com/HichamBI/Angular2-Webpack-Mocha-Chai-Sinon).
+PS : I'll not past all the sources, you can find them [here](https://github.com/HichamBI/Angular2-Webpack-Mocha-Chai-Sinon).
  
 -------------
 Settings
@@ -80,7 +87,7 @@ Bad things first :
 
 {% endhighlight %}
 
-As you can see, I'll use webpack v2.
+As you can see, we will use Webpack v2.
 
 - **mocha-webpack** and **jsdom** will be used for tests on node.
 
@@ -102,7 +109,7 @@ As you can see, I'll use webpack v2.
 {% endhighlight %}
 
 
-I'll then create an Angular 2 component for my test : 
+Then create an Angular 2 component to test it : 
 
  > **app.component.ts :**
  
@@ -170,21 +177,20 @@ export class AppService {
 
 {% endhighlight %}
 
-My component will display a list of book with an **ngFor** directive, 
-if this list is empty, my component will display a message instead.  
+Our component will display a list of book with an **ngFor** directive, 
+if this list is empty, it will display an information message instead.  
 
-My component has a dependency to AppService, and for the testing part, I'll use
-the **sinon** fake server for mocking.
+The AppCmponent has a dependency to AppService, and for the testing part, we will use
+the **sinon** fake server to mock http requests.
 
 Now we are ready for testing, let's go !
 
 #### 1. Node testing
 
-In this part, we will see the webpack configuration to launch mocha test without
-using the browser. 
+In this part, we will see the webpack configuration to launch mocha test in Node environment. 
 
-I'll use **mocha-webpack** to precompile webpack bundles on server side. But is not enough.
-Angular 2 (especially zone.js) need some part of DOM to work, this is why  I'use **jsdom** library. 
+Using **mocha-webpack** to precompile bundles on server side, but is not enough,
+Angular 2 (especially Zone.js) need some part of DOM to work, this is why  we use **jsdom** library. 
 
  > **webpack.test.common.js :**
  
@@ -239,9 +245,8 @@ module.exports = {
 
 {% endhighlight %}
 
-
-Nothing special in this file, except the **resolveLoader** that I'add to bypass mocha-loader
-syntax incompatibility with Webpack v2 : mocha-loader use loaders without the the "-loader" suffix which is forbidden with webpack v2.
+Nothing special in this file, except the **resolveLoader** to bypass mocha-loader
+syntax incompatibility with Webpack v2 : mocha-loader use loaders without the "-loader" suffix, which is now forbidden.
 
  > **webpack.test.node.js :**
  
@@ -257,9 +262,9 @@ module.exports = webpackMerge(commonTestConfig, {
 
 {% endhighlight %}
 
-I'll use **nodeExternals** to exclude node modules in Webpack.
+We use **nodeExternals** to exclude node modules in Webpack.
 
-After, I'll define mocha-webpack options in a separate file : 
+After, we define mocha-webpack options in a separate file : 
 
  > **mocha-webpack.opts :**
  
@@ -271,8 +276,8 @@ test/*.spec.ts
 
 {% endhighlight %}
 
-The last thing to configure, is the dom for our test, using **jsdom** I'll create the following
-file that I already declared in **mocha-webpack.opts**:
+The last thing to configure, is the DOM using **jsdom** we create the following
+file that is already declared in **mocha-webpack.opts**:
 
  > **mocha-node-test-shim.js :**
  
@@ -304,7 +309,8 @@ testing.TestBed.initTestEnvironment(browser.BrowserDynamicTestingModule, browser
 
 {% endhighlight %}
 
-The first part in this file, is used to initialize globals that zone.js need.
+The first part in this file, is to initialize globals that zone.js need.
+
 What was messing in [Radzen blog](http://www.radzen.com/blog/testing-angular-webpack-mocha/) solution, is the following instruction :
 
 {% highlight javascript %}
@@ -313,18 +319,13 @@ global.Node = window.Node;
 
 {% endhighlight %}
 
-Without this, Angular 2 directives will not work in our tests.
+Without this, Angular 2 directives will not work.
 
-After that, we require libraries that our test use.
+After that, we require some Angular2 libraries.
  
-Please note that now, zone.js, provide a patch for mocha **mocha-patch.js**,
-this patch will not work in our case, because he need a global window and mocha, mocha-webpack plugin will compile **mocha-node-test-shim.js**
-before instantiating mocha. But our test will work fine without it.
+Please note that now, zone.js, provide a patch for mocha **mocha-patch.js**, it will be using in the next part,
+now we have all we need to start testing.
  
-This patch will be very helpful with the browser tests.
-
-Now, we finished our configuration, let's test it.
-
 {% highlight javascript %}
 
 describe(`App Component Test`, () => {
@@ -381,7 +382,7 @@ describe(`App Component Test`, () => {
 
 {% endhighlight %}
 
-And we launch tests with : 
+Launch tests with : 
 
 {% highlight javascript %}
 
@@ -393,7 +394,7 @@ And we launch tests with :
 
 {% endhighlight %}
 
-We can see the result on the console :
+Test results on the console :
 
 
 
@@ -428,7 +429,7 @@ module.exports = webpackMerge(commonTestConfig, {
 {% endhighlight %}
 
 We use an entry file **mocha-browser-test-shim.js** that will be loaded by mocha.
-This entry file is similar to the one we used for Node testing, but here we don't need 
+This entry file is similar to the one used for Node testing, but here we don't need 
 to use **jsdom**.
 
 {% highlight javascript %}
@@ -455,9 +456,9 @@ module.exports = context;
 
 {% endhighlight %}
 
-This time we need to require the mocha patch, without it our tests will not work.
+Now we have to require the mocha patch.
 
-And we launch tests with : 
+Launch tests with : 
 
 {% highlight javascript %}
 
