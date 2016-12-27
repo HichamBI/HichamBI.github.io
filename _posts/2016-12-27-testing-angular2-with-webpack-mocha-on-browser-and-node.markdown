@@ -85,11 +85,12 @@ Bad things first :
 
 We will use :
 
-+ **Webpack v2**.
++ - **Webpack v2**.
 
-+ **mocha-webpack** and **jsdom** for tests on node.
++ - **mocha-webpack** and **jsdom** for tests on node.
 
-+ **mocha-loader** for tests on browser.
++ - **mocha-loader** for tests on browser.
+
 
 > **typings.json :**
 
@@ -152,7 +153,7 @@ export class AppComponent implements OnInit {
 
  > **app.service.ts :**
  
-{% highlight javascript %}
+{% highlight typescript %}
 
 @Injectable()
 export class AppService {
@@ -200,7 +201,7 @@ module.exports = {
         extensions: ['.ts', '.js']
     },
     resolveLoader: {
-        moduleExtensions: ['-loader']                                                        
+        moduleExtensions: ['-loader']                                                      
     },
     module: {
         rules: [
@@ -262,7 +263,7 @@ Next, we define mocha-webpack options in a separate file :
 
  > **mocha-webpack.opts :**
  
-{% highlight javascript %}
+{% highlight json %}
 
 --webpack-config config/webpack.test.node.js
 --require config/mocha/mocha-node-test-shim.js
@@ -380,7 +381,6 @@ describe(`App Component Test`, () => {
 
 Launch tests with : 
 
-{% highlight javascript %}
 
     npm test
     
@@ -388,12 +388,10 @@ Launch tests with :
    
     mocha-webpack --opts config/mocha/mocha-webpack.opts
 
-{% endhighlight %}
-
 Tests results on the console :
 
 <p align="center">  
-    <img src="/img/node-tests-result.png" alt="Tests results on Node console"/>
+    <img src="/img/node-tests-result.png" alt="Tests results on Node console" height: "300px;"/>
 </p>
 
 #### 2. Browser testing
@@ -456,21 +454,17 @@ module.exports = context;
 
 Launch tests with : 
 
-{% highlight javascript %}
-
     npm run test:server
     
     Or
    
     webpack-dev-server --config config/webpack.test.browser.js --inline --progress --port 8888
 
-{% endhighlight %}
-
 Go to [localhost:8888]() to see the results.
 
 
 <p align="center">  
-    <img src="/img/browser-tests-result.png" alt="Tests results on Node console"/>
+    <img src="/img/browser-tests-result.png" alt="Tests results on Node console" height: "300px;"/>
 </p>
 
 
@@ -479,3 +473,4 @@ You can find code source [here](https://github.com/HichamBI/Angular2-Webpack-Moc
 Don't hesitate to comment if I missed something or you have an issue or better idea.
 
 Thanks,
+
