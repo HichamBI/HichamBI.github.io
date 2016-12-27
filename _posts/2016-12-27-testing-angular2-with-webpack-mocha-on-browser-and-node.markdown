@@ -112,7 +112,7 @@ Then create an Angular 2 component :
 
  > **app.component.ts :**
  
-{% highlight javascript %}
+{% highlight typescript %}
 
 @Component({
     selector: 'app',
@@ -263,7 +263,7 @@ Next, we define mocha-webpack options in a separate file :
 
  > **mocha-webpack.opts :**
  
-{% highlight json %}
+{% highlight javascript %}
 
 --webpack-config config/webpack.test.node.js
 --require config/mocha/mocha-node-test-shim.js
@@ -322,8 +322,10 @@ After that, we require some Angular2 libraries.
 Please note that now, **Zone.js**, provide a **mocha-patch.js**, it will be used in the next part.
 
 Now we have all what we need to start writing testing.
- 
-{% highlight javascript %}
+
+> **app.component.spec.ts :**
+
+{% highlight typescript %}
 
 describe(`App Component Test`, () => {
     let comp: AppComponent;
@@ -391,7 +393,7 @@ Launch tests with :
 Tests results on the console :
 
 <p align="center">  
-    <img src="/img/node-tests-result.png" alt="Tests results on Node console" height: "300"/>
+    <img src="/img/node-tests-result.png" alt="Tests results on Node console" height="300"/>
 </p>
 
 #### 2. Browser testing
@@ -427,6 +429,8 @@ module.exports = webpackMerge(commonTestConfig, {
 We use an entry file **mocha-browser-test-shim.js** that will be loaded by mocha.
 This entry file is similar to the one used for Node testing, but here we need 
 to require **the mocha patch**.
+
+> **mocha-browser-test-shim.js :**
 
 {% highlight javascript %}
 
@@ -464,7 +468,7 @@ Go to [localhost:8888]() to see the results.
 
 
 <p align="center">  
-    <img src="/img/browser-tests-result.png" alt="Tests results on Node console" height: "300"/>
+    <img src="/img/browser-tests-result.png" alt="Tests results on Node console" height="300"/>
 </p>
 
 
