@@ -397,7 +397,11 @@ Launch tests with :
 
 Tests results on the console :
 
-
+<p align="center">
+  
+    <img src="img/node-tests-result.png" alt="Tests results on Node console"/>
+  
+</p>
 
 #### 2. Browser testing
 
