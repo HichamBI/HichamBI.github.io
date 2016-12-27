@@ -393,7 +393,7 @@ Launch tests with :
 Tests results on the console :
 
 <p align="center">  
-    <img src="/img/node-tests-result.png" alt="Tests results on Node console" height="300"/>
+    <img src="/img/node-tests-result.png" alt="Tests results on Node console"/>
 </p>
 
 #### 2. Browser testing
@@ -468,7 +468,7 @@ Go to [localhost:8888]() to see the results.
 
 
 <p align="center">  
-    <img src="/img/browser-tests-result.png" alt="Tests results on Node console" height="300"/>
+    <img src="/img/browser-tests-result.png" alt="Tests results on Node console"/>
 </p>
 
 
