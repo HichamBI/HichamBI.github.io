@@ -33,7 +33,7 @@ Bad things first :
 
 {% highlight json %}
 
-{
+ {
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 8080",
     "test": "rimraf .tmp && mocha-webpack --opts config/mocha/mocha-webpack.opts",
