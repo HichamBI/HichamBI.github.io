@@ -107,22 +107,22 @@ Then create an Angular component :
  
 {% highlight typescript %}
 
-@Component({
-    selector: 'app',
-    templateUrl: './app.component.html'
-})
-export class AppComponent implements OnInit {
-    bookList: Book[] = [];
-    title: string = 'Best Of Books';
-    emptyMessage: string = 'Book List is empty !';
+    @Component({
+        selector: 'app',
+        templateUrl: './app.component.html'
+    })
+    export class AppComponent implements OnInit {
+        bookList: Book[] = [];
+        title: string = 'Best Of Books';
+        emptyMessage: string = 'Book List is empty !';
 
-    constructor(private bookService: BookService) {
-    }
+        constructor(private bookService: BookService) {
+        }
 
-    ngOnInit(): void {
-        this.bookService.getBookList().then(books => this.bookList = books);
+        ngOnInit(): void {
+            this.bookService.getBookList().then(books => this.bookList = books);
+        }
     }
-}
 
 {% endhighlight %}
 
@@ -199,24 +199,24 @@ export class AppComponent implements OnInit {
  
 {% highlight typescript %}
 
-@Injectable()
-export class AppService {
+    @Injectable()
+    export class AppService {
 
-    constructor(private http: Http) {
-    }
+        constructor(private http: Http) {
+        }
 
-    getBookList(): Promise<Book[]> {
-        let allBooksUrl = `http://localhost:8080/book/all`;
-        return this.http.get(allBooksUrl)
-            .toPromise()
-            .then(response => response.json() as Book[])
-            .catch(AppService.handleError);
-    }
+        getBookList(): Promise<Book[]> {
+            let allBooksUrl = `http://localhost:8080/book/all`;
+            return this.http.get(allBooksUrl)
+                .toPromise()
+                .then(response => response.json() as Book[])
+                .catch(AppService.handleError);
+        }
 
-    private static handleError(error: any): Promise<any> {
-        return Promise.reject(error.message || error);
+        private static handleError(error: any): Promise<any> {
+            return Promise.reject(error.message || error);
+        }
     }
-}
 
 {% endhighlight %}
 
@@ -241,71 +241,71 @@ Angular (especially **Zone.js**) needs some part of DOM to work, this is why we 
  
 {% highlight javascript %}
 
-module.exports = {
-    devtool: 'cheap-module-source-map',
+    module.exports = {
+        devtool: 'cheap-module-source-map',
 
-    resolve: {
-        extensions: ['.ts', '.js']
-    },
+        resolve: {
+            extensions: ['.ts', '.js']
+        },
 
-    resolveLoader: {
-        moduleExtensions: ['-loader'] // To bypass mocha-loader incompatibility with webpack :
-                                      // mocha-loader still using loaders without the "-loader" suffix,
-                                      // which is forbidden with webpack v2
-    },
+        resolveLoader: {
+            moduleExtensions: ['-loader'] // To bypass mocha-loader incompatibility with webpack :
+                                          // mocha-loader still using loaders without the "-loader" suffix,
+                                          // which is forbidden with webpack v2
+        },
 
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                exclude: helpers.root('src/test'),
-                loaders: ['istanbul-instrumenter-loader', 'awesome-typescript-loader', 'angular2-template-loader']
-            },
-            {
-                test: /\.ts$/,
-                include: helpers.root('src/test'),
-                loaders: [
-                    {
-                        loader: 'awesome-typescript-loader',
-                        options: {configFileName: helpers.root('tsconfig.json')}
-                    }, 'angular2-template-loader'
-                ]
-            },
-            {
-                test: /\.html$/,
-                loader: 'html-loader'
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    exclude: helpers.root('src/test'),
+                    loaders: ['istanbul-instrumenter-loader', 'awesome-typescript-loader', 'angular2-template-loader']
+                },
+                {
+                    test: /\.ts$/,
+                    include: helpers.root('src/test'),
+                    loaders: [
+                        {
+                            loader: 'awesome-typescript-loader',
+                            options: {configFileName: helpers.root('tsconfig.json')}
+                        }, 'angular2-template-loader'
+                    ]
+                },
+                {
+                    test: /\.html$/,
+                    loader: 'html-loader'
 
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'null-loader'
-            },
-            {
-                test: /\.css$/,
-                exclude: helpers.root('src', 'app'),
-                loader: 'null-loader'
-            },
-            {
-                test: /\.css$/,
-                include: helpers.root('src', 'app'),
-                loader: 'raw-loader'
-            }
-        ]
-    },
+                },
+                {
+                    test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+                    loader: 'null-loader'
+                },
+                {
+                    test: /\.css$/,
+                    exclude: helpers.root('src', 'app'),
+                    loader: 'null-loader'
+                },
+                {
+                    test: /\.css$/,
+                    include: helpers.root('src', 'app'),
+                    loader: 'raw-loader'
+                }
+            ]
+        },
 
-    plugins: [
-        // Workaround for angular/angular#11580
-        new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)@angular/,
-            helpers.root('src'),
-            {}
-        ),
-    ],
+        plugins: [
+            // Workaround for angular/angular#11580
+            new webpack.ContextReplacementPlugin(
+                /angular(\\|\/)core(\\|\/)@angular/,
+                helpers.root('src'),
+                {}
+            ),
+        ],
 
-    performance: {
-        hints: false
-    }
-};
+        performance: {
+            hints: false
+        }
+    };
 
 {% endhighlight %}
 
@@ -316,13 +316,13 @@ syntax incompatibility with Webpack v2 : mocha-loader use loaders without the "-
  
 {% highlight javascript %}
 
-module.exports = webpackMerge(commonTestConfig, {
-    target: 'node',
+    module.exports = webpackMerge(commonTestConfig, {
+        target: 'node',
 
-    externals: [
-        nodeExternals()
-    ]
-});
+        externals: [
+            nodeExternals()
+        ]
+    });
 
 {% endhighlight %}
 
@@ -334,9 +334,9 @@ Next, we define mocha-webpack options in a separate file :
  
 {% highlight javascript %}
 
---webpack-config config/webpack.test.node.js
---require config/mocha/mocha-node-test-shim.js
-src/test/*.spec.ts
+    --webpack-config config/webpack.test.node.js
+    --require config/mocha/mocha-node-test-shim.js
+    src/test/*.spec.ts
 
 {% endhighlight %}
 
@@ -383,7 +383,7 @@ What was missing in [Radzen blog](http://www.radzen.com/blog/testing-angular-web
 
 {% highlight javascript %}
 
-global.Node = window.Node;
+    global.Node = window.Node;
 
 {% endhighlight %}
 
@@ -397,180 +397,180 @@ Please note that now, **Zone.js**, provide a **mocha-patch.js**, it will be used
 
 {% highlight typescript %}
 
-describe(`App Component`, () => {
-    let comp: AppComponent;
-    let fixture: ComponentFixture<AppComponent>;
-    let server : any;
+    describe(`App Component`, () => {
+        let comp: AppComponent;
+        let fixture: ComponentFixture<AppComponent>;
+        let server : any;
 
-    beforeEach(() => {
-        server = sinon.fakeServer.create();
-        server.autoRespond = true;
-        server.respondWith("GET",
-            "http://localhost:8080/book/all",
-            [202,
-                {"Content-Type": "application/json"},
-                '[' +
-                '{"originalTitle" :"The Hunger Games", "author" : "Suzanne Collins"},' +
-                '{"originalTitle" :"Pride and Prejudice", "author" : "Jane Austen"},' +
-                '{"originalTitle" :"The Chronicles of Narnia", "author" : "C.S. Lewis"}' +
-                ']'
-            ]
-        );
+        beforeEach(() => {
+            server = sinon.fakeServer.create();
+            server.autoRespond = true;
+            server.respondWith("GET",
+                "http://localhost:8080/book/all",
+                [202,
+                    {"Content-Type": "application/json"},
+                    '[' +
+                    '{"originalTitle" :"The Hunger Games", "author" : "Suzanne Collins"},' +
+                    '{"originalTitle" :"Pride and Prejudice", "author" : "Jane Austen"},' +
+                    '{"originalTitle" :"The Chronicles of Narnia", "author" : "C.S. Lewis"}' +
+                    ']'
+                ]
+            );
 
-        TestBed.configureTestingModule({
-            imports: [HttpModule, FormsModule],
-            declarations: [AppComponent, BookFormComponent],
-            providers: [AppService],
-        }).compileComponents();
-    });
+            TestBed.configureTestingModule({
+                imports: [HttpModule, FormsModule],
+                declarations: [AppComponent, BookFormComponent],
+                providers: [AppService],
+            }).compileComponents();
+        });
 
-    afterEach(() => {
-        server.restore();
-        getTestBed().resetTestingModule();
-    });
+        afterEach(() => {
+            server.restore();
+            getTestBed().resetTestingModule();
+        });
 
-    it('should display a title', () => {
-        let title : any;
-        fixture = TestBed.createComponent(AppComponent);
+        it('should display a title', () => {
+            let title : any;
+            fixture = TestBed.createComponent(AppComponent);
 
-        title = fixture.debugElement.query(By.css('h2'));
-        expect(title.nativeElement.textContent).to.equal('');
+            title = fixture.debugElement.query(By.css('h2'));
+            expect(title.nativeElement.textContent).to.equal('');
 
-        fixture.detectChanges();
-
-        title = fixture.debugElement.query(By.css('h2'));
-        expect(title.nativeElement.textContent).to.equal('Best Of Books');
-    });
-
-    it('should have a non empty book List', (done) => {
-        fixture = TestBed.createComponent(AppComponent);
-        comp = fixture.componentInstance;
-
-        fixture.detectChanges();
-        expect(comp.bookList.length).equal(0);
-
-        fixture.whenStable().then(() => {
             fixture.detectChanges();
 
-            expect(comp.bookList.length).equal(3);
-
-            let bookTitle = fixture.debugElement.query(By.css('li span'));
-            expect(bookTitle.nativeElement.textContent).to.equal('The Hunger Games');
-
-            done();
+            title = fixture.debugElement.query(By.css('h2'));
+            expect(title.nativeElement.textContent).to.equal('Best Of Books');
         });
-    });
 
-    it('should display a empty message when empty book list', (done) => {
-        fixture = TestBed.createComponent(AppComponent);
-        comp = fixture.componentInstance;
-
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-            comp.bookList = []; // Empty Book List
+        it('should have a non empty book List', (done) => {
+            fixture = TestBed.createComponent(AppComponent);
+            comp = fixture.componentInstance;
 
             fixture.detectChanges();
-            let bookTitle = fixture.debugElement.query(By.css('h4'));
-            expect(bookTitle).to.be.null;
+            expect(comp.bookList.length).equal(0);
 
-            let errorMessage = fixture.debugElement.query(By.css('span'));
-            expect(errorMessage.nativeElement.textContent).to.equal('Book List is empty !');
-            done();
+            fixture.whenStable().then(() => {
+                fixture.detectChanges();
+
+                expect(comp.bookList.length).equal(3);
+
+                let bookTitle = fixture.debugElement.query(By.css('li span'));
+                expect(bookTitle.nativeElement.textContent).to.equal('The Hunger Games');
+
+                done();
+            });
+        });
+
+        it('should display a empty message when empty book list', (done) => {
+            fixture = TestBed.createComponent(AppComponent);
+            comp = fixture.componentInstance;
+
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                comp.bookList = []; // Empty Book List
+
+                fixture.detectChanges();
+                let bookTitle = fixture.debugElement.query(By.css('h4'));
+                expect(bookTitle).to.be.null;
+
+                let errorMessage = fixture.debugElement.query(By.css('span'));
+                expect(errorMessage.nativeElement.textContent).to.equal('Book List is empty !');
+                done();
+            });
         });
     });
-});
 
 {% endhighlight %}
 
-let chai = require('chai') , spies = require('chai-spies');
-chai.use(spies);
+    let chai = require('chai') , spies = require('chai-spies');
+    chai.use(spies);
 
-function newEvent(eventName: string, bubbles = false, cancelable = false) {
-    let evt = document.createEvent('CustomEvent');  // MUST be 'CustomEvent'
-    evt.initCustomEvent(eventName, bubbles, cancelable, null);
-    return evt;
-}
+    function newEvent(eventName: string, bubbles = false, cancelable = false) {
+        let evt = document.createEvent('CustomEvent');  // MUST be 'CustomEvent'
+        evt.initCustomEvent(eventName, bubbles, cancelable, null);
+        return evt;
+    }
 
-describe(`Book Form Component`, () => {
-    let comp: BookFormComponent;
-    let fixture: ComponentFixture<BookFormComponent>;
+    describe(`Book Form Component`, () => {
+        let comp: BookFormComponent;
+        let fixture: ComponentFixture<BookFormComponent>;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [BookFormComponent],
-        }).compileComponents();
-    });
+        beforeEach(() => {
+            TestBed.configureTestingModule({
+                imports: [FormsModule],
+                declarations: [BookFormComponent],
+            }).compileComponents();
+        });
 
-    afterEach(() => {
-        getTestBed().resetTestingModule();
-    });
+        afterEach(() => {
+            getTestBed().resetTestingModule();
+        });
 
-    it('should display a title', () => {
-        fixture = TestBed.createComponent(BookFormComponent);
-        let title: any;
+        it('should display a title', () => {
+            fixture = TestBed.createComponent(BookFormComponent);
+            let title: any;
 
-        title = fixture.debugElement.query(By.css('h1'));
-        expect(title.nativeElement.textContent).to.equal('');
+            title = fixture.debugElement.query(By.css('h1'));
+            expect(title.nativeElement.textContent).to.equal('');
 
-        fixture.detectChanges();
-
-        title = fixture.debugElement.query(By.css('h1'));
-        expect(title.nativeElement.textContent).to.equal('Add New Book');
-    });
-
-    it('should log book title', (done) => {
-        fixture = TestBed.createComponent(BookFormComponent);
-        comp = fixture.componentInstance;
-
-        let originalTitleInput = fixture.debugElement.query(By.css('#originalTitle')).nativeElement;
-        let logSpan = fixture.debugElement.query(By.css('span'));
-
-        fixture.detectChanges();
-        expect(logSpan.nativeElement.textContent).to.equal('Log : ');
-
-        fixture.whenStable().then(() => {
-            originalTitleInput.value = 'Harry Potter';
-            originalTitleInput.dispatchEvent(newEvent('input'));
             fixture.detectChanges();
 
-            expect(comp.model.originalTitle).to.equal('Harry Potter');
-            expect(logSpan.nativeElement.textContent).to.equal('Log : Harry Potter');
+            title = fixture.debugElement.query(By.css('h1'));
+            expect(title.nativeElement.textContent).to.equal('Add New Book');
+        });
 
-            done();
+        it('should log book title', (done) => {
+            fixture = TestBed.createComponent(BookFormComponent);
+            comp = fixture.componentInstance;
+
+            let originalTitleInput = fixture.debugElement.query(By.css('#originalTitle')).nativeElement;
+            let logSpan = fixture.debugElement.query(By.css('span'));
+
+            fixture.detectChanges();
+            expect(logSpan.nativeElement.textContent).to.equal('Log : ');
+
+            fixture.whenStable().then(() => {
+                originalTitleInput.value = 'Harry Potter';
+                originalTitleInput.dispatchEvent(newEvent('input'));
+                fixture.detectChanges();
+
+                expect(comp.model.originalTitle).to.equal('Harry Potter');
+                expect(logSpan.nativeElement.textContent).to.equal('Log : Harry Potter');
+
+                done();
+            });
+        });
+
+        it('should call newBook function when submit button clicked', () => {
+            fixture = TestBed.createComponent(BookFormComponent);
+            comp = fixture.componentInstance;
+
+            let submitButton = fixture.debugElement.query(By.css('#submit'));
+            let newBookFunction = chai.spy.on(comp, 'newBook');
+            let onSubmitFunction = chai.spy.on(comp, 'onSubmit');
+
+            submitButton.triggerEventHandler('click', {});
+
+            expect(newBookFunction).to.have.been.called();
+            expect(onSubmitFunction).to.not.have.been.called();
+
+        });
+
+        it('should call onSubmit function when form submitted', () => {
+            fixture = TestBed.createComponent(BookFormComponent);
+            comp = fixture.componentInstance;
+
+            let form = fixture.debugElement.query(By.css('form'));
+            let onSubmitFunction = chai.spy.on(comp, 'onSubmit');
+            let newBookFunction = chai.spy.on(comp, 'newBook');
+
+
+            form.triggerEventHandler('submit', {});
+
+            expect(newBookFunction).to.not.have.been.called();
+            expect(onSubmitFunction).to.have.been.called();
         });
     });
-
-    it('should call newBook function when submit button clicked', () => {
-        fixture = TestBed.createComponent(BookFormComponent);
-        comp = fixture.componentInstance;
-
-        let submitButton = fixture.debugElement.query(By.css('#submit'));
-        let newBookFunction = chai.spy.on(comp, 'newBook');
-        let onSubmitFunction = chai.spy.on(comp, 'onSubmit');
-
-        submitButton.triggerEventHandler('click', {});
-
-        expect(newBookFunction).to.have.been.called();
-        expect(onSubmitFunction).to.not.have.been.called();
-
-    });
-
-    it('should call onSubmit function when form submitted', () => {
-        fixture = TestBed.createComponent(BookFormComponent);
-        comp = fixture.componentInstance;
-
-        let form = fixture.debugElement.query(By.css('form'));
-        let onSubmitFunction = chai.spy.on(comp, 'onSubmit');
-        let newBookFunction = chai.spy.on(comp, 'newBook');
-
-
-        form.triggerEventHandler('submit', {});
-
-        expect(newBookFunction).to.not.have.been.called();
-        expect(onSubmitFunction).to.have.been.called();
-    });
-});
 
 {% endhighlight %}
 
@@ -597,25 +597,25 @@ This time, we will use mocha-loader plugin for testing :
  
 {% highlight javascript %}
 
-module.exports = webpackMerge(commonTestConfig, {
-    target: 'web',
+    module.exports = webpackMerge(commonTestConfig, {
+        target: 'web',
 
-    entry: {
-        'test': 'mocha-loader!./config/mocha/mocha-browser-test-shim.js'
-    },
+        entry: {
+            'test': 'mocha-loader!./config/mocha/mocha-browser-test-shim.js'
+        },
 
-    output: {
-        path: helpers.root('tests'),
-        publicPath: '/',
-        filename: 'test.bundle.js'
-    },
+        output: {
+            path: helpers.root('tests'),
+            publicPath: '/',
+            filename: 'test.bundle.js'
+        },
 
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: helpers.root('src/test/mocha-index.html')
-        })
-    ]
-});
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: helpers.root('src/test/mocha-index.html')
+            })
+        ]
+    });
 
 {% endhighlight %}
 
@@ -627,25 +627,25 @@ to require **the mocha patch**.
 
 {% highlight javascript %}
 
-require('core-js/es6');
-require('core-js/es7/reflect');
+    require('core-js/es6');
+    require('core-js/es7/reflect');
 
-require('zone.js/dist/zone');
-require('zone.js/dist/long-stack-trace-zone');
-require('zone.js/dist/proxy');
-require('zone.js/dist/sync-test');
-require('zone.js/dist/async-test');
-require('zone.js/dist/fake-async-test');
-require('zone.js/dist/mocha-patch');
+    require('zone.js/dist/zone');
+    require('zone.js/dist/long-stack-trace-zone');
+    require('zone.js/dist/proxy');
+    require('zone.js/dist/sync-test');
+    require('zone.js/dist/async-test');
+    require('zone.js/dist/fake-async-test');
+    require('zone.js/dist/mocha-patch');
 
-const testing = require('@angular/core/testing');
-const browser = require('@angular/platform-browser-dynamic/testing');
+    const testing = require('@angular/core/testing');
+    const browser = require('@angular/platform-browser-dynamic/testing');
 
-testing.TestBed.initTestEnvironment(browser.BrowserDynamicTestingModule, browser.platformBrowserDynamicTesting());
+    testing.TestBed.initTestEnvironment(browser.BrowserDynamicTestingModule, browser.platformBrowserDynamicTesting());
 
-const context = require.context('./../../src/test', true, /\.spec\.ts/);
-context.keys().forEach(context);
-module.exports = context;
+    const context = require.context('./../../src/test', true, /\.spec\.ts/);
+    context.keys().forEach(context);
+    module.exports = context;
 
 {% endhighlight %}
 
