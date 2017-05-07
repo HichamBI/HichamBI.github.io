@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Angular version > 2 Testing with Webpack, Mocha, Chai and Sinon."
-date: 2017-05-07 15:00:00
+date:   2016-12-27 19:00:00
 img: "posts/angular2.svg"
 ---
 
