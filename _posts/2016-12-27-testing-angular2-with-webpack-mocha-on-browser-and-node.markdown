@@ -482,6 +482,10 @@ Please note that now, **Zone.js**, provide a **mocha-patch.js**, it will be used
 
 {% endhighlight %}
 
+> **book-form.component.spec.ts :**
+
+{% highlight typescript %}
+
     let chai = require('chai') , spies = require('chai-spies');
     chai.use(spies);
 
