@@ -5,6 +5,8 @@ date:   2016-12-27 19:00:00
 img: "posts/angular2.svg"
 ---
 
+(Last edit : Mai 07, 2017)
+
 Hey !
 Do you want to unit test an Angular application with Mocha, on both, browser and/or Node. (without Karma or PhantomJs) ?
 
@@ -18,12 +20,24 @@ and it work fine except when I've tried to test a component with an **ngFor** di
     caused by: Node is not defined
 
 
-In this post, I will share with you my solution to this issue and also the Webpack configuration
+In this post, I will share with you my solution to this issue and also I will share with you the Webpack configuration
 to launch test in browser with the mocha-loader plugin. 
 
-I'll not past all the sources, you can find them [here](https://github.com/HichamBI/Angular2-Webpack-Mocha-Chai-Sinon).
+I'll not past all the sources, you can find them [here](https://github.com/HichamBI/Angular-testing-webpack-mocha-chai-sinon).
 
-Let's start.
+In this tutorial we will use :
+
++ - **Angular v4.1.1.
+
++ - **Webpack v2.2.1.
+
++ - **jsdom v10.1.0. (need Node > 4)
+
++ - **mocha-webpack** for Node testing.
+
++ - **mocha-loader** for Browser testing.
+
+Let's star !
 
 #### 0. Settings
 
@@ -88,18 +102,6 @@ Bad things first :
 }  
 
 {% endhighlight %}
-
-We will use :
-
-+ - **Angular v4.1.1.
-
-+ - **Webpack v2.2.1.
-
-+ - **jsdom v10.1.0. (need Node > 4)
-
-+ - **mocha-webpack** and **jsdom** for tests on node.
-
-+ - **mocha-loader** for tests on browser.
 
 Then create an Angular component :
 
@@ -669,7 +671,7 @@ Go to [localhost:8888]() to see the results.
 </p>
 
 
-You can sources [here](https://github.com/HichamBI/Angular2-Webpack-Mocha-Chai-Sinon).
+You can find sources [here](https://github.com/HichamBI/Angular-testing-webpack-mocha-chai-sinon).
 
 Don't hesitate to comment if I missed something or you have an issue or better idea.
 
