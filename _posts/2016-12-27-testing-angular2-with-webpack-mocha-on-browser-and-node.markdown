@@ -27,11 +27,11 @@ I'll not past all the sources, you can find them [here](https://github.com/Hicha
 
 In this tutorial we will use :
 
-+ - **Angular v4.1.1.
++ - **Angular** v4.1.1.
 
-+ - **Webpack v2.2.1.
++ - **Webpack** v2.2.1.
 
-+ - **jsdom v10.1.0. (need Node > 4)
++ - **jsdom** v10.1.0. (need Node > 4)
 
 + - **mocha-webpack** for Node testing.
 
