@@ -5,7 +5,7 @@ date:   2016-12-27 19:00:00
 img: "posts/angular2.svg"
 ---
 
-(Last edit : January 16, 2018)
+(Last edit : November 19, 2018)
 
 Hey !
 Do you want to unit test an Angular application with Mocha, on both, browser and/or Node. (without Karma or PhantomJs) ?
@@ -27,11 +27,11 @@ I'll not past all the sources, you can find them [here](https://github.com/Hicha
 
 In this tutorial we will use :
 
-+ - **Angular v5.2.0.
++ - **Angular v7.0.4.
 
-+ - **Webpack v3.10.0.
++ - **Webpack v4.26.0.
 
-+ - **jsdom v11.5.1. (need Node > 4)
++ - **jsdom v13.0.0. (need Node > 4)
 
 + - **mocha-webpack** for Node testing.
 
@@ -47,63 +47,109 @@ Bad things first :
 
 {% highlight json %}
     {
+      "name": "angular-webpack-mocha-chai-sinon",
+      "version": "1.0.0",
+      "description": "Running Angular tests with Webpack and Mocha",
+      "license": "ISC",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HichamBI/Angular-testing-webpack-mocha-chai-sinon"
+      },
+      "keywords": [
+        "angular",
+        "test",
+        "mocha",
+        "webpack",
+        "mocha-loader",
+        "mocha-webpack",
+        "sinon",
+        "chai",
+        "jsdom",
+        "node"
+      ],
+      "author": "Hicham BOUZIDI IDRISSI",
+      "bugs": {
+        "url": "https://github.com/HichamBI/Angular-testing-webpack-mocha-chai-sinon/issues"
+      },
+      "homepage": "https://github.com/HichamBI/Angular-testing-webpack-mocha-chai-sinon#readme",
       "scripts": {
-        "start": "webpack-dev-server --inline --progress --port 8080",
+        "start": "webpack-dev-server --mode development --watch-content-base",
         "test": "rimraf .tmp && mocha-webpack --opts config/mocha/mocha-webpack.opts",
         "test:watch": "rimraf .tmp && mocha-webpack --opts config/mocha/mocha-webpack.opts --watch",
-        "test:report": "rimraf .tmp && mocha-webpack --opts config/mocha/mocha-webpack.opts --reporter=xunit --reporter-options output=tests-report.xml",
-        "test:coverage": "rimraf .tmp && nyc --reporter=text --reporter=cobertura mocha-webpack --opts config/mocha/mocha-webpack.opts",
-        "test:server": "webpack-dev-server --config config/webpack.test.browser.js --inline --progress --port 8888"
+        "test:server": "webpack-dev-server --mode development --config config/webpack.test.browser.js",
+        "test:coverage": "rimraf reports && cross-env NODE_ENV=coverage nyc --reporter=text --reporter=text-summary mocha-webpack --opts config/mocha/mocha-webpack.opts",
+        "test:reports": "rimraf reports && cross-env NODE_ENV=coverage nyc mocha-webpack --opts config/mocha/mocha-webpack.opts --reporter=xunit --reporter-options output=reports/tests/tests-report.xml",
+        "tslint": "tslint --format stylish --project tsconfig.json -c tslint.json --force"
       },
       "dependencies": {
-        "@angular/common": "5.2.0",
-        "@angular/compiler": "5.2.0",
-        "@angular/core": "5.2.0",
-        "@angular/forms": "5.2.0",
-        "@angular/http": "5.2.0",
-        "@angular/platform-browser": "5.2.0",
-        "@angular/platform-browser-dynamic": "5.2.0",
-        "@angular/router": "5.2.0",
-        "core-js": "2.5.3",
-        "rxjs": "5.5.6",
-        "zone.js": "0.8.20"
+        "@angular/common": "7.0.4",
+        "@angular/compiler": "7.0.4",
+        "@angular/compiler-cli": "7.0.4",
+        "@angular/core": "7.0.4",
+        "@angular/forms": "7.0.4",
+        "@angular/http": "7.0.4",
+        "@angular/language-service": "7.0.4",
+        "@angular/platform-browser": "7.0.4",
+        "@angular/platform-browser-dynamic": "7.0.4",
+        "@angular/platform-server": "7.0.4",
+        "@angular/router": "7.0.4",
+        "core-js": "2.5.7",
+        "rxjs": "6.3.3",
+        "zone.js": "0.8.26"
       },
       "devDependencies": {
-        "@types/chai": "4.1.0",
+        "@types/chai": "4.1.7",
         "@types/chai-spies": "0.0.0",
-        "@types/mocha": "2.2.46",
-        "@types/node": "9.3.0",
-        "@types/sinon": "4.1.3",
+        "@types/mocha": "5.2.5",
+        "@types/node": "10.12.9",
+        "@types/sinon": "5.0.6",
         "angular2-template-loader": "0.6.2",
-        "awesome-typescript-loader": "3.4.1",
-        "chai": "4.1.2",
+        "atob": "2.1.0",
+        "awesome-typescript-loader": "5.2.1",
+        "chai": "4.2.0",
         "chai-spies": "1.0.0",
-        "css-loader": "0.28.8",
-        "extract-text-webpack-plugin": "3.0.2",
-        "file-loader": "1.1.6",
-        "html-loader": "0.5.4",
-        "html-webpack-plugin": "2.30.1",
-        "istanbul-instrumenter-loader": "3.0.0",
-        "jsdom": "11.5.1",
-        "mocha": "4.1.0",
-        "mocha-loader": "1.1.2",
-        "mocha-webpack": "1.0.1",
+        "codelyzer": "4.5.0",
+        "cross-env": "5.2.0",
+        "css-loader": "1.0.1",
+        "file-loader": "2.0.0",
+        "html-loader": "0.5.5",
+        "html-webpack-plugin": "3.2.0",
+        "istanbul-instrumenter-loader": "3.0.1",
+        "jsdom": "13.0.0",
+        "lodash": "4.17.11",
+        "mini-css-extract-plugin": "0.4.4",
+        "mixin-deep": "2.0.0",
+        "mocha": "5.2.0",
+        "mocha-loader": "2.0.0",
+        "mocha-webpack": "2.0.0-beta.0",
         "null-loader": "0.1.1",
-        "nyc": "11.4.1",
+        "nyc": "13.1.0",
         "rimraf": "2.6.2",
-        "sinon": "4.1.6",
-        "style-loader": "0.19.1",
+        "sinon": "7.1.1",
+        "style-loader": "0.23.1",
         "to-string-loader": "1.1.5",
-        "typescript": "2.6.2",
-        "webpack": "3.10.0",
-        "webpack-dev-server": "2.11.0",
-        "webpack-merge": "4.1.1",
-        "webpack-node-externals": "1.6.0"
+        "tslint": "5.11.0",
+        "typescript": "3.1.6",
+        "webpack": "4.26.0",
+        "webpack-archive-plugin": "3.0.0",
+        "webpack-cli": "3.1.2",
+        "webpack-dev-middleware": "3.4.0",
+        "webpack-dev-server": "3.1.10",
+        "webpack-merge": "4.1.4",
+        "webpack-node-externals": "1.7.2"
       },
       "nyc": {
         "include": [
           "src/**/*.ts"
-        ]
+        ],
+        "reporter": [
+          "text",
+          "text-summary",
+          "html"
+        ],
+        "instrument": false,
+        "sourceMap": false,
+        "report-dir": "./reports/coverage"
       }
     }
 {% endhighlight %}
@@ -115,20 +161,20 @@ Then create an Angular component :
 {% highlight typescript %}
 
     @Component({
-        selector: 'app',
-        templateUrl: './app.component.html'
+      selector: 'app',
+      templateUrl: './app.component.html'
     })
     export class AppComponent implements OnInit {
-        bookList: Book[] = [];
-        title: string = 'Best Of Books';
-        emptyMessage: string = 'Book List is empty !';
-
-        constructor(private bookService: BookService) {
-        }
-
-        ngOnInit(): void {
-            this.bookService.getBookList().then(books => this.bookList = books);
-        }
+      bookList: Book[] = [];
+      title = 'Best Of Books';
+      emptyMessage = 'Book List is empty !';
+    
+      constructor(private bookService: AppService) {
+      }
+    
+      ngOnInit(): void {
+        this.bookService.getBookList().subscribe(books => this.bookList = books);
+      }
     }
 
 {% endhighlight %}
@@ -212,16 +258,9 @@ Then create an Angular component :
         constructor(private http: Http) {
         }
 
-        getBookList(): Promise<Book[]> {
-            let allBooksUrl = `http://localhost:8080/book/all`;
-            return this.http.get(allBooksUrl)
-                .toPromise()
-                .then(response => response.json() as Book[])
-                .catch(AppService.handleError);
-        }
-
-        private static handleError(error: any): Promise<any> {
-            return Promise.reject(error.message || error);
+        getBookList(): Observable<Book[]> {
+        const allBooksUrl = `http://localhost:8080/book/all`;
+        return this.http.get<Book[]>(allBooksUrl);
         }
     }
 
@@ -249,61 +288,62 @@ Angular (especially **Zone.js**) needs some part of DOM to work, this is why we 
 {% highlight javascript %}
 
     const helpers = require('./helpers');
-    const webpack = require('webpack');
-
+    const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+    
+    process.traceDeprecation = true;
+    
     module.exports = {
-
-        resolve: {
-            extensions: ['.ts', '.js']
-        },
-
-        resolveLoader: {
-            moduleExtensions: ['-loader'] // To bypass mocha-loader incompatibility with webpack :
-                                          // mocha-loader still using loaders without the "-loader" suffix,
-                                          // which is forbidden with webpack v2++
-        },
-
-        module: {
-            rules: [
-                {
-                    test: /\.html$/,
-                    loader: 'raw-loader',
-                    exclude: [helpers.root('src/test/mocha-index.html')]
-                },
-                {
-                    test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                    loader: 'null-loader'
-                },
-                {
-                    test: /\.css$/,
-                    exclude: helpers.root('src', 'app'),
-                    loader: 'null-loader'
-                },
-                {
-                    test: /\.css$/,
-                    include: helpers.root('src', 'app'),
-                    loader: 'raw-loader'
-                },
-                {
-                    test: /\.json$/,
-                    loader: 'json-loader',
-                    exclude: [helpers.root('src/index.html')]
-                }
-            ]
-        },
-
-        plugins: [
-            // Workaround for angular/angular#11580
-            new webpack.ContextReplacementPlugin(
-                /\@angular(\\|\/)core(\\|\/)esm5/,
-                helpers.root('src'),
-                {}
-            ),
-        ],
-
-        performance: {
-            hints: false
-        }
+    
+      resolve: {
+        extensions: ['.ts', '.js', 'json']
+      },
+    
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            parser: {
+              system: true // no warning : https://github.com/webpack/webpack/pull/6321
+            }
+          },
+          {
+            test: /\.html$/,
+            use: 'raw-loader',
+            exclude: [helpers.root('src/test/mocha-index.html')]
+          },
+          {
+            test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+            use: 'null-loader'
+          },
+          {
+            test: /\.css$/,
+            exclude: helpers.root('src', 'app'),
+            use: 'null-loader'
+          },
+          {
+            test: /\.css$/,
+            include: helpers.root('src', 'app'),
+            use: 'raw-loader'
+          },
+          {
+            test: /\.json$/,
+            use: 'json-loader',
+            exclude: [helpers.root('src/index.html')]
+          }
+        ]
+      },
+    
+      plugins: [
+        new ContextReplacementPlugin(
+          // The (\\|\/) piece accounts for path separators in *nix and Windows
+          /(.+)?angular(\\|\/)core(.+)?/,
+          helpers.root('src') // location of your src
+        ),
+      ],
+    
+      performance: {
+        hints: false
+      }
     };
 
 {% endhighlight %}
@@ -320,67 +360,67 @@ syntax incompatibility with Webpack v2 : mocha-loader use loaders without the "-
     const webpackMerge = require('webpack-merge');
     const commonTestConfig = require('./webpack.test.common.js');
     const isCoverage = process.env.NODE_ENV === 'coverage';
-
+    
     const coverageRules = [].concat(
-        {
-            enforce: 'post',
-            test: /\.(js|ts)$/,
-            include: helpers.root('src'),
-            exclude: [
-                /\.(e2e|spec)\.ts$/,
-                /node_modules/
-            ],
-            loaders: ['istanbul-instrumenter-loader']
-        },
-        {
-            test: /\.ts$/,
-            include: helpers.root('src'),
-            exclude: [/\.e2e\.ts$/],
-            loaders: [{
-                loader: 'awesome-typescript-loader',
-                query: {
-                    // use inline sourcemaps for "coverage" reporter
-                    sourceMap: false,
-                    inlineSourceMap: true,
-                    compilerOptions: {
-                        // Remove TypeScript helpers to be injected
-                        // below by DefinePlugin
-                        removeComments: true
-                    }
-                }
-            }, 'angular2-template-loader']
-        });
-
-    const nonCoverageRules = [{
+      {
+        enforce: 'post',
+        test: /\.(js|ts)$/,
+        include: helpers.root('src'),
+        exclude: [
+          /\.(e2e|spec)\.ts$/,
+          /node_modules/
+        ],
+        loaders: ['istanbul-instrumenter-loader']
+      },
+      {
         test: /\.ts$/,
         include: helpers.root('src'),
         exclude: [/\.e2e\.ts$/],
         loaders: [{
-            loader: 'awesome-typescript-loader',
-            query: {
-                sourceMap: true
+          loader: 'awesome-typescript-loader',
+          query: {
+            // use inline sourcemaps for "coverage" reporter
+            sourceMap: false,
+            inlineSourceMap: true,
+            compilerOptions: {
+              // Remove TypeScript helpers to be injected
+              // below by DefinePlugin
+              removeComments: true
             }
+          }
         }, 'angular2-template-loader']
+      });
+    
+    const nonCoverageRules = [{
+      test: /\.ts$/,
+      include: helpers.root('src'),
+      exclude: [/\.e2e\.ts$/],
+      loaders: [{
+        loader: 'awesome-typescript-loader',
+        query: {
+          sourceMap: true
+        }
+      }, 'angular2-template-loader']
     }];
-
+    
     module.exports = webpackMerge(commonTestConfig, {
-        target: 'node',
-
-        devtool: isCoverage ? 'eval' : 'inline-source-map',
-
-        output: {
-            // use absolute paths in sourcemaps (important for debugging via IDE)
-            devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-            devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
-        },
-
-        module: {
-            rules: isCoverage ? coverageRules : nonCoverageRules
-        },
-
-        externals: [
-            nodeExternals()
-        ]
+      target: 'node',
+    
+      devtool: isCoverage ? 'eval' : 'inline-source-map',
+    
+      output: {
+        // use absolute paths in sourcemaps (important for debugging via IDE)
+        devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+        devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
+      },
+    
+      module: {
+        rules: isCoverage ? coverageRules : nonCoverageRules
+      },
+    
+      externals: [
+        nodeExternals()
+      ]
     });
 
 {% endhighlight %}
@@ -395,6 +435,7 @@ Next, we define mocha-webpack options in a separate file :
 
     --webpack-config config/webpack.test.node.js
     --require config/mocha/mocha-node-test-shim.js
+    --mode development
     src/test/*.spec.ts
 
 {% endhighlight %}
@@ -409,31 +450,66 @@ We create the following file declared in **mocha-webpack.opts**:
 
     require('core-js/es6');
     require('core-js/es7/reflect');
-
+    
     require('zone.js/dist/zone-node');
     require('zone.js/dist/long-stack-trace-zone');
     require('zone.js/dist/proxy');
     require('zone.js/dist/sync-test');
     require('zone.js/dist/async-test');
     require('zone.js/dist/fake-async-test');
-
+    
     const testing = require('@angular/core/testing');
     const browser = require('@angular/platform-browser-dynamic/testing');
-
+    
     testing.TestBed.initTestEnvironment(browser.BrowserDynamicTestingModule, browser.platformBrowserDynamicTesting());
-
+    
     const jsdom=  require("jsdom");
     const { JSDOM } = jsdom;
-
+    
     const window = (new JSDOM('<!doctype html><html><body></body></html>')).window;
     const document = window.document;
-
+    
     global.window = window;
     global.document = document;
+    global.Document = document;
     global.HTMLElement = window.HTMLElement;
     global.XMLHttpRequest = window.XMLHttpRequest;
     global.Node = window.Node;
     global.Event = window.Event;
+    global.Element = window.Element;
+    global.navigator = window.navigator;
+    global.KeyboardEvent = window.KeyboardEvent;
+    
+    global.localStorage = {
+      store : {},
+    
+      getItem: function (key) {
+        return this.store[key] || null;
+      },
+      setItem: function (key, value) {
+        this.store[key] = value;
+      },
+      clear: function () {
+        this.store = {};
+      }
+    };
+    
+    global.sessionStorage = {
+      store : {},
+    
+      getItem: function (key) {
+        return this.store[key] || null;
+      },
+      setItem: function (key, value) {
+        this.store[key] = value;
+      },
+      clear: function () {
+        this.store = {};
+      }
+    };
+    
+    // https://github.com/angular/material2/issues/7101
+    Object.defineProperty(document.body.style, 'transform', {value: () => ({enumerable: true, configurable: true})});
 
 {% endhighlight %}
 
@@ -661,25 +737,53 @@ This time, we will use mocha-loader plugin for testing :
  
 {% highlight javascript %}
 
+    const helpers = require('./helpers');
+    const webpackMerge = require('webpack-merge');
+    const commonTestConfig = require('./webpack.test.common.js');
+    const HtmlWebpackPlugin = require('html-webpack-plugin');
+    
     module.exports = webpackMerge(commonTestConfig, {
-        target: 'web',
-
-        entry: {
-            'test': 'mocha-loader!./config/mocha/mocha-browser-test-shim.js'
-        },
-
-        output: {
-            path: helpers.root('tests'),
-            publicPath: '/',
-            filename: 'test.bundle.js'
-        },
-
-        plugins: [
-            new HtmlWebpackPlugin({
-                template: helpers.root('src/test/mocha-index.html')
-            })
+      devtool: 'cheap-module-inline-source-map',
+    
+      target: 'web',
+    
+      entry: {
+        'test': 'mocha-loader!./config/mocha/mocha-browser-test-shim.js'
+      },
+    
+      output: {
+        path: helpers.root('tests'),
+        publicPath: '/',
+        filename: 'test.bundle.js'
+      },
+    
+      module: {
+        rules: [
+          {
+            test: /\.ts$/,
+            include: helpers.root('src'),
+            exclude: [/\.e2e\.ts$/],
+            use: ['awesome-typescript-loader', 'angular2-template-loader']
+          }
         ]
+      },
+    
+      plugins: [
+        new HtmlWebpackPlugin({
+          template: helpers.root('src/test/mocha-index.html')
+        })
+      ],
+    
+      devServer: {
+        open: 'chrome',
+        port: 8888,
+        inline: true,
+        quiet: false,
+        noInfo: false,
+        stats: {colors: true}
+      }
     });
+
 
 {% endhighlight %}
 
